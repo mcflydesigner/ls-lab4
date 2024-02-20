@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vladislav-lamzenkov-deploy
+spec:
+  selector:
+    matchLabels:
+      app: vladislav-lamzenkov-app
+  template:
+    metadata:
+      labels:
+        app: vladislav-lamzenkov-app
+    spec:
+      containers:
+        - name: vladislav-lamzenkov-container
+          image: mcflydesigner/ls-lab4-vl:latest
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              cpu: "500m"
+              memory: "512Mi"
+            limits:
+              cpu: "500m"
+              memory: "1024Mi"
+          env:
+            - name: SECURITY_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: vladislav-lamzenkov-secret
+                  key: username
+            - name: SECURITY_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: vladislav-lamzenkov-secret
+                  key: password

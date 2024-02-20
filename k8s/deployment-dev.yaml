@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vladislav-lamzenkov-deploy-dev
+  namespace: dev
+spec:
+  selector:
+    matchLabels:
+      app: vladislav-lamzenkov-app
+  template:
+    metadata:
+      labels:
+        app: vladislav-lamzenkov-app
+    spec:
+      containers:
+        - name: vladislav-lamzenkov-container
+          image: mcflydesigner/ls-lab4-vl:latest
+          ports:
+            - containerPort: 8080
